@@ -111,4 +111,21 @@ echo "--------"
 echo "CPU"
 echo "--------"
 lscpu | egrep 'Model name|Socket|Thread|NUMA|CPU\(s\)'
+echo ""
+echo "--------"
+echo "Load & logged users "
+echo "--------"
+w
+echo ""
+echo "--------"
+echo "WAN/Public IP"
+echo "--------"
+if ! command -v dig &> /dev/null
+then
+    #dig command not found i will use external site https://www.cyberciti.biz/faq/how-to-find-my-public-ip-address-from-command-line-on-a-linux/
+    server_ip="$(curl -s ifconfig.co)"
+    printf "Server public ip4 %s\n" $server_ip
+else 
+    dig TXT +short o-o.myaddr.l.google.com @ns1.google.com | awk -F'"' '{ print $2}'
+fi
 echo "----------------------------------------"

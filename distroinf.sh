@@ -90,6 +90,9 @@ echo "Operating system distribution: $type"
 echo "Operating system architecture: $arch"
 echo "Operating system release: $release"
 echo "Operating system code name: $codename"
+echo ""
+echo "--------"
+echo "MEMORY "
 echo "--------"
 echo -n -e "Total Memory: $memory about "
 echo $memory | human_memsize_print
@@ -101,4 +104,11 @@ echo $swapsize | human_memsize_print
 else
 echo "System  does not have any swap space"
 fi
+echo ""
+free -mh
+echo ""
+echo "--------"
+echo "CPU"
+echo "--------"
+lscpu | egrep 'Model name|Socket|Thread|NUMA|CPU\(s\)'
 echo "----------------------------------------"
